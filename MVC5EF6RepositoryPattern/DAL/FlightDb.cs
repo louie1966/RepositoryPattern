@@ -16,7 +16,5 @@ namespace MVC5EF6RepositoryPattern.DAL
             modelBuilder.HasDefaultSchema("drone");
             base.OnModelCreating(modelBuilder);
         }
-
-
     }
 }

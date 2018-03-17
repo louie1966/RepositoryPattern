@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using MVC5EF6RepositoryPattern.DAL;
+using MVC5EF6RepositoryPattern.Models;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using MVC5EF6RepositoryPattern.DAL;
-using MVC5EF6RepositoryPattern.Models;
 
 namespace MVC5EF6RepositoryPattern.Controllers
 {
@@ -21,15 +18,39 @@ namespace MVC5EF6RepositoryPattern.Controllers
             return View(db.Flights.ToList());
         }
 
+        // GET: Flight
+        public ActionResult Top10LongestFlights()
+        {
+            var flights = db.Flights
+                .Where(f => f.Duration >= 10)
+                .OrderByDescending(f => f.Duration)
+                .Take(5)
+                .ToList();
+
+            return View(flights);
+        }
+
+        // GET: Flight
+        public ActionResult SunnyFlights()
+        {
+            var flights = db.Flights
+                .Where(f => f.Weather == Weather.Sunny)
+                .OrderByDescending(f => f.TakeOff)
+                .Take(5).
+                ToList();
+
+            return View(flights);
+        }
+
         // GET: Flight/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            if(id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Flight flight = db.Flights.Find(id);
-            if (flight == null)
+            if(flight == null)
             {
                 return HttpNotFound();
             }
@@ -49,7 +70,7 @@ namespace MVC5EF6RepositoryPattern.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Description,TakeOff,Weather,Duration")] Flight flight)
         {
-            if (ModelState.IsValid)
+            if(ModelState.IsValid)
             {
                 db.Flights.Add(flight);
                 db.SaveChanges();
@@ -62,12 +83,12 @@ namespace MVC5EF6RepositoryPattern.Controllers
         // GET: Flight/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            if(id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Flight flight = db.Flights.Find(id);
-            if (flight == null)
+            if(flight == null)
             {
                 return HttpNotFound();
             }
@@ -81,7 +102,7 @@ namespace MVC5EF6RepositoryPattern.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,Description,TakeOff,Weather,Duration")] Flight flight)
         {
-            if (ModelState.IsValid)
+            if(ModelState.IsValid)
             {
                 db.Entry(flight).State = EntityState.Modified;
                 db.SaveChanges();
@@ -93,12 +114,12 @@ namespace MVC5EF6RepositoryPattern.Controllers
         // GET: Flight/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            if(id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Flight flight = db.Flights.Find(id);
-            if (flight == null)
+            if(flight == null)
             {
                 return HttpNotFound();
             }
@@ -118,7 +139,7 @@ namespace MVC5EF6RepositoryPattern.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
+            if(disposing)
             {
                 db.Dispose();
             }

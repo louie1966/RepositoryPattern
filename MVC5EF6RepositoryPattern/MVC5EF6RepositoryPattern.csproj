@@ -145,8 +145,11 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\FlightController.cs" />
+    <Compile Include="Controllers\FlightRepoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DAL\FlightDb.cs" />
+    <Compile Include="DAL\Repository\FlightRepository.cs" />
+    <Compile Include="DAL\Repository\IFlightRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -214,6 +217,15 @@
     <Content Include="Views\Flight\Details.cshtml" />
     <Content Include="Views\Flight\Edit.cshtml" />
     <Content Include="Views\Flight\Index.cshtml" />
+    <Content Include="Views\FlightRepo\Create.cshtml" />
+    <Content Include="Views\FlightRepo\Delete.cshtml" />
+    <Content Include="Views\FlightRepo\Details.cshtml" />
+    <Content Include="Views\FlightRepo\Edit.cshtml" />
+    <Content Include="Views\FlightRepo\Index.cshtml" />
+    <Content Include="Views\FlightRepo\Top10LongestFlights.cshtml" />
+    <Content Include="Views\FlightRepo\SunnyFlights.cshtml" />
+    <Content Include="Views\Flight\Top10LongestFlights.cshtml" />
+    <Content Include="Views\Flight\SunnyFlights.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
